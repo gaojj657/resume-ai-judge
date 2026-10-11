@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token }}"><title>{{ title }} · 简历研判</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/app.css') }}"></head>
+{% from 'components/icons.html' import icon %}
+<body data-page="{{ page }}"><aside class="sidebar"><a class="brand" href="/"><span class="brand-icon">R</span><div>简历研判<small>RESUME JUDGE</small></div></a>
+<nav aria-label="主导航">
+{% for key, href, label in [('dashboard','/','招聘概览'),('jobs','/jobs','岗位管理'),('upload','/upload','简历评估'),('evaluations','/evaluations','评估记录'),('candidates','/candidates','候选人进度')] %}
+<a class="{{ 'active' if page == key else '' }}" href="{{ href }}"{% if page == key %} aria-current="page"{% endif %}>{{ icon(key) }}{{ label }}</a>{% endfor %}</nav>
+<div class="sidebar-bottom"><a class="settings-link {{ 'active' if page == 'settings' else '' }}" href="/settings"{% if page == 'settings' %} aria-current="page"{% endif %}>{{ icon('settings') }}模型设置</a><div class="profile"><span class="avatar">{{ username[:1]|upper }}</span><div>{{ username }}<small>管理员</small></div><form method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="icon-button" title="退出登录">↪</button></form></div></div></aside>
+<main><div class="topline"><span>工作台 <b>/</b> {{ title }}</span><span class="top-tag"><i></i> AI辅助 · 人工决策</span></div>
+<header class="page-header"><div><p class="eyebrow">RECRUITMENT WORKSPACE</p><h1>{{ title }}</h1><p>{{ subtitle }}</p></div>{% block header_action %}{% endblock %}</header>
+{% if demo_mode %}<div class="notice amber">演示环境 · 所有候选人与报告均为合成示例，未调用OpenAI，不用于真实招聘决定。</div>{% endif %}
+{% block content %}{% endblock %}<footer>简历研判 · 每一份经历，都有清晰的依据</footer></main>
+<div id="toast" role="status"></div>
+<script src="{{ url_for('static',filename='js/app.js') }}" defer></script>{% block scripts %}{% endblock %}</body></html>
+

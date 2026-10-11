@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block header_action %}<a class="button primary" href="/upload">＋ 评估新简历</a>{% endblock %}
+{% block content %}
+<div class="filters panel"><label>岗位<select id="job-filter"><option value="">全部岗位</option></select></label><label>首次评估开始<input type="date" id="start-filter"></label><label>首次评估结束<input type="date" id="end-filter"></label><button id="filter-dashboard" class="button">应用筛选</button></div>
+<div id="stats" class="stats-grid"><div class="stat-card">正在加载…</div></div>
+<div class="dashboard-grid"><section class="panel"><div class="section-heading"><div><h2>招聘漏斗</h2><p>候选人岗位记录 · 曾实际到达的阶段</p></div><span class="pill">全过程</span></div><div id="funnel" class="funnel"></div><p class="caption">支持跳阶段，到达人数比可能超过100%。未经过的阶段不会自动计入。</p></section><section class="panel"><div class="section-heading"><div><h2>当前进度分布</h2><p>现在停留在哪个阶段</p></div></div><div id="distribution" class="distribution"></div></section></div>
+<section class="panel"><div class="section-heading"><div><h2>岗位招聘概览</h2><p>各岗位独立统计，最新成功评估用于平均分</p></div><a href="/jobs" class="text-link">管理岗位 →</a></div><div class="table-wrap"><table><thead><tr><th>岗位</th><th>状态</th><th>评估记录</th><th>已推进</th><th>平均匹配分</th><th>已入职</th></tr></thead><tbody id="job-overview"></tbody></table></div></section>
+<p class="caption">时间范围以候选人＋岗位的首次成功评估时间选取，展示截至当前的后续进展。顶部人数按候选人去重，招聘中岗位数为当前值。</p>
+{% endblock %}
+

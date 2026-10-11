@@ -1,0 +1,4 @@
+-r requirements.txt
+paddlepaddle>=3,<4
+paddleocr>=3,<4
+
